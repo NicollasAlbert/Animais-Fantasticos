@@ -16,15 +16,22 @@ links.forEach((link) => {
 const body = document.querySelectorAll("body *");
 
 function aoClicar(e) {
+  e.preventDefault();
   const evento = e.target;
-  console.log(evento);
+  // Utilizando o código anterior, ao invés de mostrar no console,
+  // remova o elemento que está sendo clicado, o método remove() remove um elemento
+  // evento.remove()
 }
 
 body.forEach((itens) => {
   itens.addEventListener("click", aoClicar);
 });
 
-// Utilizando o código anterior, ao invés de mostrar no console,
-// remova o elemento que está sendo clicado, o método remove() remove um elemento
-
 // Se o usuário clicar na tecla (t), aumente todo o texto do site.
+function textoGrande(e) {
+  if (e.key === "t") {
+    document.body.classList.toggle("textoGrande");
+  }
+}
+
+addEventListener("keydown", textoGrande);
