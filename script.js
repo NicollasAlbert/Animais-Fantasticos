@@ -1,37 +1,44 @@
-// Quando o usuário clicar nos links internos do site,
-// adicione a classe ativo ao item clicado e remova dos
-// demais itens caso eles possuam a mesma. Previna
-// o comportamento padrão desses links
-const links = document.querySelectorAll(".menu a[href^='#']");
+function initTabNav() {
+  const menu = document.querySelectorAll(".js-tabmenu li");
+  const content = document.querySelectorAll(".js-tabcontent section");
 
-links.forEach((link) => {
-  link.addEventListener("click", function (e) {
-    e.preventDefault();
-    link.classList.toggle("ativo");
-  });
-});
+  if (menu.length && content.length) {
+    content[0].classList.add("ativo");
 
-// Selecione todos os elementos do site começando a partir do body,
-// ao clique mostre exatamente quais elementos estão sendo clicados
-const body = document.querySelectorAll("body *");
+    function menuContent(index) {
+      content.forEach((item) => {
+        item.classList.remove("ativo");
+      });
+      content[index].classList.add("ativo");
+    }
 
-function aoClicar(e) {
-  e.preventDefault();
-  const evento = e.target;
-  // Utilizando o código anterior, ao invés de mostrar no console,
-  // remova o elemento que está sendo clicado, o método remove() remove um elemento
-  // evento.remove()
-}
-
-body.forEach((itens) => {
-  itens.addEventListener("click", aoClicar);
-});
-
-// Se o usuário clicar na tecla (t), aumente todo o texto do site.
-function textoGrande(e) {
-  if (e.key === "t") {
-    document.body.classList.toggle("textoGrande");
+    menu.forEach((itemMenu, index) => {
+      itemMenu.addEventListener("click", () => {
+        menuContent(index);
+      });
+    });
   }
 }
 
-addEventListener("keydown", textoGrande);
+initTabNav();
+
+function initAccordion() {
+  const listaAccordion = document.querySelectorAll(".js-accordion dt");
+  const activeClass = "ativo";
+
+  if (listaAccordion.length) {
+    listaAccordion[0].classList.add(activeClass);
+    listaAccordion[0].nextElementSibling.classList.add(activeClass);
+
+    function showAccordion() {
+      this.classList.toggle(activeClass);
+      this.nextElementSibling.classList.toggle(activeClass);
+    }
+
+    listaAccordion.forEach((item) => {
+      item.addEventListener("click", showAccordion);
+    });
+  }
+}
+
+initAccordion();
