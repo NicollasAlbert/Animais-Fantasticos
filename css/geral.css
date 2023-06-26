@@ -311,3 +311,18 @@ html.textoGrande {
     margin-bottom: 0px;
   }
 }
+
+[data-semana]::after {
+  display: inline-block;
+  content: "";
+  width: 6px;
+  height: 6px;
+  background-color: #e54;
+  border-radius: 50%;
+  margin-left: 4px;
+  border: 2px solid black;
+}
+
+[data-semana].aberto::after {
+  background-color: #3F4;
+}
