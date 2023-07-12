@@ -326,3 +326,10 @@ html.textoGrande {
 [data-semana].aberto::after {
   background-color: #3F4;
 }
+
+.btc-preco {
+  background: #3F4;
+  font-weight: bold;
+  padding: .2rem .5rem;
+  border-radius: 2px;
+}
