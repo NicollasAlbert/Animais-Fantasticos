@@ -1,15 +1,22 @@
-export default function initScrollSmooth() {
-  const linksInternos = document.querySelectorAll("[data-menu='suave'] a[href^='#']");
+export default class ScrollSmooth {
+  constructor(links, options) {
+    this.linksInternos = document.querySelectorAll(links);
+    if (options === undefined) {
+      this.options = { behavior: 'smooth', block: 'start' };
+    } else {
+        this.options = options;
+    }
 
-  function slideSmooth(e) {
+    this.slideSmooth = this.slideSmooth.bind(this);
+  }
+  
+
+  slideSmooth(e) {
     e.preventDefault();
-    const href = this.getAttribute("href");
+    const href = e.currentTarget.getAttribute("href");
     const section = document.querySelector(href);
 
-    section.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
+    section.scrollIntoView(this.options);
 
     // forma alternativa
     // const topo = section.offsetTop;
@@ -19,7 +26,17 @@ export default function initScrollSmooth() {
     // });
   }
 
-  linksInternos.forEach((link) => {
-    link.addEventListener("click", slideSmooth);
-  });
+  addLinkEvent() {
+    this.linksInternos.forEach((link) => {
+      link.addEventListener("click", this.slideSmooth);
+    });
+  }
+
+  init() {
+    if (this.linksInternos.length) {
+    this.addLinkEvent();
+    }
+    return this;
+  }
+
 }
