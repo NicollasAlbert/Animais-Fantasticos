@@ -1,9 +1,11 @@
-export default function initAnimaNumeros() {
-    
-  function animaNumeros() {
-    const numeros = document.querySelectorAll('[data-numero]');
+export default class initAnimaNumeros {
+  constructor(numeros) {
+    this.numeros = document.querySelectorAll(numeros);
+  }
+  
+  animaNumeros() {
 
-    numeros.forEach(numero => {
+    this.numeros.forEach(numero => {
       const total = +numero.innerText;
       const incremento = Math.floor(total / 100);
 
@@ -23,7 +25,7 @@ export default function initAnimaNumeros() {
   let observer;
 
   function handleMutation(mutation) {
-    if (mutation[0].target.classList.contains('ativo')) {
+    if (mutation[0].target.classList.contains(observerClass)) {
       observer.disconnect();
       animaNumeros();
     }
