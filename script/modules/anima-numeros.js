@@ -1,12 +1,13 @@
 export default class initAnimaNumeros {
-  constructor(numeros) {
+  constructor(numeros, observeTarget, observerClass) {
     this.numeros = document.querySelectorAll(numeros);
+    this.observeTarget = document.querySelector(observeTarget);
+    this.observerClass = observerClass;
+    this.handleMutation.bind(this);
   }
-  
-  animaNumeros() {
 
-    this.numeros.forEach(numero => {
-      const total = +numero.innerText;
+  static incrementarNumero(numero) {
+    const total = +numero.innerText;
       const incremento = Math.floor(total / 100);
 
       let start = 0;
@@ -18,23 +19,30 @@ export default class initAnimaNumeros {
           clearInterval(timer);
         }
       },25 * Math.random())
-    })
+  }
+  
+  animaNumeros() {
+
+    this.numeros.forEach(numero => this.constructor.incrementarNumero(numero))
 
   }
 
-  let observer;
-
-  function handleMutation(mutation) {
+  handleMutation(mutation) {
     if (mutation[0].target.classList.contains(observerClass)) {
-      observer.disconnect();
-      animaNumeros();
+      this.observer.disconnect();
+      this.animaNumeros();
     }
   }
 
-  observer = new MutationObserver(handleMutation);
-
-  const observeTarget = document.querySelector('.numeros');
-
-  observer.observe(observeTarget, {attributes: true});
+  addMutationObserver() {
+    this.observer = new MutationObserver(this.handleMutation);
+    observer.observe(this.observeTarget, {attributes: true});
+  } 
   
+  init() {
+    if(this.numeros.length && this.observeTarget) {
+    this.addMutationObserver();
+    }
+    return this;
+  }
 }
