@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-param-reassign */
 export default class initAnimaNumeros {
   constructor(numeros, observeTarget, observerClass) {
     this.numeros = document.querySelectorAll(numeros);
@@ -8,23 +10,21 @@ export default class initAnimaNumeros {
 
   static incrementarNumero(numero) {
     const total = +numero.innerText;
-      const incremento = Math.floor(total / 100);
+    const incremento = Math.floor(total / 100);
 
-      let start = 0;
-      const timer = setInterval(() => {
-        start += incremento;
-        numero.innerText = start;
-        if (start > total) {
-          numero.innerText = total;
-          clearInterval(timer);
-        }
-      },25 * Math.random())
+    let start = 0;
+    const timer = setInterval(() => {
+      start += incremento;
+      numero.innerText = start;
+      if (start > total) {
+        numero.innerText = total;
+        clearInterval(timer);
+      }
+    }, 25 * Math.random());
   }
-  
+
   animaNumeros() {
-
-    this.numeros.forEach(numero => this.constructor.incrementarNumero(numero))
-
+    this.numeros.forEach((numero) => this.constructor.incrementarNumero(numero));
   }
 
   handleMutation(mutation) {
@@ -36,12 +36,12 @@ export default class initAnimaNumeros {
 
   addMutationObserver() {
     this.observer = new MutationObserver(this.handleMutation);
-    observer.observe(this.observeTarget, {attributes: true});
-  } 
-  
+    observer.observe(this.observeTarget, { attributes: true });
+  }
+
   init() {
-    if(this.numeros.length && this.observeTarget) {
-    this.addMutationObserver();
+    if (this.numeros.length && this.observeTarget) {
+      this.addMutationObserver();
     }
     return this;
   }

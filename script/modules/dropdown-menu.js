@@ -1,21 +1,42 @@
-import outsideClick from "./outsideclick.js";
+/* eslint-disable class-methods-use-this */
+/* eslint-disable import/no-named-as-default-member */
+/* eslint-disable import/no-named-as-default */
+/* eslint-disable import/extensions */
+import outsideClick from './outsideclick.js';
 
-export default function initDropDownMenu() {
+export default class DropDownMenu {
+  constructor(dropDownMenus, events) {
+    this.dropDownMenus = document.querySelectorAll(dropDownMenus);
+    if (events === undefined) {
+      this.events = ['touchstart', 'click'];
+    } else {
+      this.events = events;
+    }
+    this.activeClass = 'ativo';
+    this.activeDropdownMenu = this.activeDropdownMenu.bind(this);
+  }
 
-  const dropDownMenus = document.querySelectorAll('[data-dropdown]');
-
-  function handleClick(event) {
+  activeDropdownMenu(event) {
     event.preventDefault();
-    this.classList.add('ativo');
-    outsideClick(this, ['touchstart', 'click'], () => {
-      this.classList.remove('ativo');
+    const element = event.currentTarget;
+    element.classList.add(this.activeClass);
+    outsideClick(element, this.events, () => {
+      element.classList.remove(this.activeClass);
     });
   }
 
-  dropDownMenus.forEach((menu) => {    
-    ['touchstart', 'click'].forEach(userEvent => {
-      menu.addEventListener(userEvent, handleClick);
-    })
-  });
+  addDropdownMenusEvent() {
+    this.dropDownMenus.forEach((menu) => {
+      this.events.forEach((userEvent) => {
+        menu.addEventListener(userEvent, this.activeDropdownMenu);
+      });
+    });
+  }
 
+  init() {
+    if (this.dropDownMenus.length) {
+      this.addDropdownMenusEvent();
+    }
+    return this;
+  }
 }

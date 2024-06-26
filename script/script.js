@@ -1,14 +1,17 @@
-import ScrollSmooth from "./modules/scroll-suave.js";
-import ScrollAnimado from "./modules/scroll-animacao.js";
-import Accordion from "./modules/accordion.js";
-import TabNav from "./modules/tabnav.js";
-import Modal from "./modules/modal.js";
-import Tooltip from "./modules/tooltip.js";
-import initDropDownMenu from "./modules/dropdown-menu.js";
-import initMenuMobile from "./modules/menu-mobile.js";
-import initFuncionamento from "./modules/funcionamento.js";
-import fetchAnimais from "./modules/fetch-animais.js";
-import fetchBitcoin from "./modules/fetch-bitcoin.js";
+/* eslint-disable import/no-named-as-default-member */
+/* eslint-disable import/no-named-as-default */
+/* eslint-disable import/extensions */
+import ScrollSmooth from './modules/scroll-suave.js';
+import ScrollAnimado from './modules/scroll-animacao.js';
+import Accordion from './modules/accordion.js';
+import TabNav from './modules/tabnav.js';
+import Modal from './modules/modal.js';
+import Tooltip from './modules/tooltip.js';
+import DropDownMenu from './modules/dropdown-menu.js';
+import MenuMobile from './modules/menu-mobile.js';
+import initFuncionamento from './modules/funcionamento.js';
+import fetchAnimais from './modules/fetch-animais.js';
+import fetchBitcoin from './modules/fetch-bitcoin.js';
 
 const scrollSuave = new ScrollSmooth('[data-menu="suave"] a[href^="#"]');
 scrollSuave.init();
@@ -28,8 +31,12 @@ tooltip.init();
 const scrollAnimado = new ScrollAnimado("[data-anime='scroll']");
 scrollAnimado.init();
 
-initDropDownMenu();
-initMenuMobile();
+const dropdownMenu = new DropDownMenu('[data-dropdown]');
+dropdownMenu.init();
+
+const menuMobile = new MenuMobile('[data-menu="button"]', '[data-menu="list"]');
+menuMobile.init();
+
 initFuncionamento();
 
 fetchAnimais('../../animaisapi.json', '.numeros-grid');

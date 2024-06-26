@@ -17,7 +17,7 @@ export default class TabNav {
 
   addTabNavEvent() {
     this.menu.forEach((itemMenu, index) => {
-      itemMenu.addEventListener("click", () => this.menuContent(index));
+      itemMenu.addEventListener('click', () => this.menuContent(index));
     });
   }
 

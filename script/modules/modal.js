@@ -7,9 +7,9 @@ export default class Modal {
     this.eventToggleModal = this.eventToggleModal.bind(this);
     this.cliqueForaModal = this.cliqueForaModal.bind(this);
   }
-  
+
   toggleModal() {
-    this.containerModal.classList.toggle("ativo");
+    this.containerModal.classList.toggle('ativo');
   }
 
   eventToggleModal(event) {
@@ -18,15 +18,14 @@ export default class Modal {
   }
 
   cliqueForaModal(event) {
-    if (event.target === this.containerModal) 
-    this.toggleModal();
+    if (event.target === this.containerModal) { this.toggleModal(); }
   }
 
   addModalEvents() {
-    this.botaoAbrir.addEventListener("click", this.eventToggleModal);
+    this.botaoAbrir.addEventListener('click', this.eventToggleModal);
 
-    this.botaoFechar.addEventListener("click", this.eventToggleModal);
-    this.containerModal.addEventListener("click", this.cliqueForaModal);
+    this.botaoFechar.addEventListener('click', this.eventToggleModal);
+    this.containerModal.addEventListener('click', this.cliqueForaModal);
   }
 
   init() {
@@ -35,5 +34,4 @@ export default class Modal {
     }
     return this;
   }
-  
 }

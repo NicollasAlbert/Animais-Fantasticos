@@ -4,16 +4,15 @@ export default class ScrollSmooth {
     if (options === undefined) {
       this.options = { behavior: 'smooth', block: 'start' };
     } else {
-        this.options = options;
+      this.options = options;
     }
 
     this.slideSmooth = this.slideSmooth.bind(this);
   }
-  
 
   slideSmooth(e) {
     e.preventDefault();
-    const href = e.currentTarget.getAttribute("href");
+    const href = e.currentTarget.getAttribute('href');
     const section = document.querySelector(href);
 
     section.scrollIntoView(this.options);
@@ -28,15 +27,14 @@ export default class ScrollSmooth {
 
   addLinkEvent() {
     this.linksInternos.forEach((link) => {
-      link.addEventListener("click", this.slideSmooth);
+      link.addEventListener('click', this.slideSmooth);
     });
   }
 
   init() {
     if (this.linksInternos.length) {
-    this.addLinkEvent();
+      this.addLinkEvent();
     }
     return this;
   }
-
 }
