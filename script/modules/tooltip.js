@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 export default class Tooltip {
   constructor(tooltips) {
     this.tooltips = document.querySelectorAll(tooltips);
@@ -19,8 +18,8 @@ export default class Tooltip {
 
   onMouseLeave({ currentTarget }) {
     this.tooltipBox.remove();
-    currentTarget.removeEventListener('mouseleave', onMouseLeave);
-    currentTarget.removeEventListener('mousemove', onMouseMove);
+    currentTarget.removeEventListener('mouseleave', this.onMouseLeave);
+    currentTarget.removeEventListener('mousemove', this.onMouseMove);
   }
 
   criarTooltipBox(element) {

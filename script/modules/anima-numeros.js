@@ -1,11 +1,10 @@
-/* eslint-disable no-undef */
 /* eslint-disable no-param-reassign */
 export default class initAnimaNumeros {
   constructor(numeros, observeTarget, observerClass) {
     this.numeros = document.querySelectorAll(numeros);
     this.observeTarget = document.querySelector(observeTarget);
     this.observerClass = observerClass;
-    this.handleMutation.bind(this);
+    this.handleMutation = this.handleMutation.bind(this);
   }
 
   static incrementarNumero(numero) {
@@ -28,7 +27,7 @@ export default class initAnimaNumeros {
   }
 
   handleMutation(mutation) {
-    if (mutation[0].target.classList.contains(observerClass)) {
+    if (mutation[0].target.classList.contains(this.observerClass)) {
       this.observer.disconnect();
       this.animaNumeros();
     }
@@ -36,7 +35,7 @@ export default class initAnimaNumeros {
 
   addMutationObserver() {
     this.observer = new MutationObserver(this.handleMutation);
-    observer.observe(this.observeTarget, { attributes: true });
+    this.observer.observe(this.observeTarget, { attributes: true });
   }
 
   init() {
